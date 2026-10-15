@@ -2,6 +2,6 @@
 printer ok 12
 scanner repair 30
 router ok 45
-printer repair8
+printer repair 8
 server ok 100
 router repair 15
