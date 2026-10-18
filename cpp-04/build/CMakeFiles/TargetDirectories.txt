@@ -1,0 +1,3 @@
+/home/ubuntu/ncuscc-practice/cpp-04/build/CMakeFiles/main.dir
+/home/ubuntu/ncuscc-practice/cpp-04/build/CMakeFiles/edit_cache.dir
+/home/ubuntu/ncuscc-practice/cpp-04/build/CMakeFiles/rebuild_cache.dir
