@@ -1,0 +1,6 @@
+5
+add A100 3
+add B200 1
+borrow A100 2
+borrow B200 1
+return A100
