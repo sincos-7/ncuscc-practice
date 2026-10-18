@@ -8,6 +8,7 @@ int main() {
 
     std::map<std::string, int> onShelf;
     std::map<std::string, int> borrowed;
+    bool has_error = false;
 
     for (int i = 0; i < count; i++) {
         std::string operation;
@@ -26,6 +27,7 @@ int main() {
                 borrowed[code] += copies;
             } else {
                 std::cout << "rejected\n";
+                has_error = true;
             }
         } else if (operation == "return") {
             if (borrowed[code] > 0) {
@@ -33,31 +35,33 @@ int main() {
                 onShelf[code]++;
             } else {
                 std::cout << "rejected\n";
+                has_error = true;
             }
         }
     }
 
-    int totalOnShelf = 0;
-    int totalBorrowed = 0;
-    
-    // 合并所有出现过的书
-    std::map<std::string, std::pair<int, int>> allBooks;
-    for (auto& p : onShelf) {
-        allBooks[p.first].first = p.second;
-        totalOnShelf += p.second;
-    }
-    for (auto& p : borrowed) {
-        allBooks[p.first].second = p.second;
-        totalBorrowed += p.second;
-    }
+    // 只有没有错误的时候，才输出统计信息
+    if (!has_error) {
+        int totalOnShelf = 0;
+        int totalBorrowed = 0;
+        
+        std::map<std::string, std::pair<int, int>> allBooks;
+        for (auto& p : onShelf) {
+            allBooks[p.first].first = p.second;
+            totalOnShelf += p.second;
+        }
+        for (auto& p : borrowed) {
+            allBooks[p.first].second = p.second;
+            totalBorrowed += p.second;
+        }
 
-    std::cout << "titles=" << allBooks.size() << "\n";
-    std::cout << "onShelf=" << totalOnShelf << "\n";
-    std::cout << "borrowed=" << totalBorrowed << "\n";
-    
-    // 按字典序输出每本书的详情
-    for (auto& p : allBooks) {
-        std::cout << p.first << " " << p.second.first << " " << p.second.second << "\n";
+        std::cout << "titles=" << allBooks.size() << "\n";
+        std::cout << "onShelf=" << totalOnShelf << "\n";
+        std::cout << "borrowed=" << totalBorrowed << "\n";
+        
+        for (auto& p : allBooks) {
+            std::cout << p.first << " " << p.second.first << " " << p.second.second << "\n";
+        }
     }
     
     return 0;
